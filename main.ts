@@ -6,9 +6,6 @@ input.onButtonPressed(Button.A, function () {
     ja.turn(Direction.Left, 180)
     JA_DVAN.turn(Direction.Left, 180)
 })
-input.onButtonPressed(Button.AB, function () {
-	
-})
 input.onButtonPressed(Button.B, function () {
     ja.move(1)
     JA_DVAN.move(1)
@@ -105,12 +102,14 @@ basic.forever(function () {
         point.turn(Direction.Right, 180)
         point.move(2)
         win = win + 1
+        game.addScore(1)
     }
     if (point.isTouching(e2)) {
         e2.delete()
         point.turn(Direction.Right, 180)
         point.move(2)
         win = win + 1
+        game.addScore(1)
     }
     if (point.isTouching(e3)) {
         e3.delete()
@@ -129,17 +128,20 @@ basic.forever(function () {
         point.turn(Direction.Right, 180)
         point.move(2)
         win = win + 1
+        game.addScore(1)
     }
     if (point.isTouching(e6)) {
         e6.delete()
         point.turn(Direction.Right, 180)
         point.move(2)
         win = win + 1
+        game.addScore(1)
     }
     if (point.isTouching(_7e)) {
         _7e.delete()
         point.turn(Direction.Right, 180)
         point.move(2)
+        game.addScore(1)
         win = win + 1
     }
     if (point.isTouching(e8)) {
@@ -147,18 +149,21 @@ basic.forever(function () {
         point.turn(Direction.Right, 180)
         point.move(2)
         win = win + 1
+        game.addScore(1)
     }
     if (point.isTouching(e9)) {
         e9.delete()
         point.turn(Direction.Right, 180)
         point.move(2)
         win = win + 1
+        game.addScore(1)
     }
     if (point.isTouching(e10final)) {
         e10final.delete()
         point.turn(Direction.Right, 180)
         point.move(2)
         win = win + 1
+        game.addScore(1)
     }
     if (point.isTouching(S4)) {
         game.removeLife(1)
