@@ -1,3 +1,20 @@
+/**
+ * posouva sprity 
+ * 
+ * ja,JA DVAN
+ * 
+ * Vlevo
+ */
+/**
+ * posouva sprity 
+ * 
+ * ja,JA DVAN
+ * 
+ * vpravo
+ */
+/**
+ * načte hru
+ */
 input.onButtonPressed(Button.A, function () {
     ja.turn(Direction.Right, 180)
     JA_DVAN.turn(Direction.Right, 180)
@@ -6,11 +23,16 @@ input.onButtonPressed(Button.A, function () {
     ja.turn(Direction.Left, 180)
     JA_DVAN.turn(Direction.Left, 180)
 })
+input.onLogoEvent(TouchButtonEvent.Touched, function () {
+    game.resume()
+})
+input.onButtonPressed(Button.AB, function () {
+    game.pause()
+})
 input.onButtonPressed(Button.B, function () {
     ja.move(1)
     JA_DVAN.move(1)
 })
-let win = 0
 let JA_DVAN: game.LedSprite = null
 let ja: game.LedSprite = null
 game.setLife(20)
@@ -18,7 +40,7 @@ basic.showLeds(`
     # # # # #
     # # # # #
     . . . . .
-    . # . # .
+    . # . . .
     . . # # .
     `)
 basic.showLeds(`
@@ -45,7 +67,6 @@ basic.showLeds(`
 ja = game.createSprite(2, 4)
 JA_DVAN = game.createSprite(3, 4)
 let point = game.createSprite(2, 2)
-game.setLife(5)
 let e1 = game.createSprite(0, 0)
 basic.pause(100)
 let e2 = game.createSprite(1, 0)
@@ -66,18 +87,16 @@ let e9 = game.createSprite(2, 1)
 basic.pause(100)
 let e10final = game.createSprite(3, 1)
 let gůkbodgkrhkgihihtjiht = game.createSprite(4, 1)
-let S4 = game.createSprite(0, 4)
-let S3 = game.createSprite(1, 4)
-let S1 = game.createSprite(4, 4)
+let S1 = game.createSprite(0, 4)
+let S2 = game.createSprite(1, 4)
+let S3 = game.createSprite(2, 4)
+let S4 = game.createSprite(3, 4)
+let S5 = game.createSprite(4, 4)
 point.turn(Direction.Right, 45)
 basic.forever(function () {
     point.ifOnEdgeBounce()
-    if (game.isGameOver()) {
-        game.startCountdown(10000)
-        basic.clearScreen()
-        basic.showIcon(IconNames.Heart)
-        basic.pause(1000)
-        basic.clearScreen()
+    if (point.isTouchingEdge()) {
+        point.turn(Direction.Right, 45)
     }
 })
 basic.forever(function () {
@@ -85,7 +104,7 @@ basic.forever(function () {
     basic.pause(699)
 })
 basic.forever(function () {
-    if (win == 10) {
+    if (game.score() == 10) {
         game.gameOver()
         basic.showString("JSI VITEZ BLAHOPREJI.")
         music.play(music.stringPlayable("A E C5 F D G C B ", 120), music.PlaybackMode.UntilDone)
@@ -93,76 +112,70 @@ basic.forever(function () {
     }
 })
 basic.forever(function () {
+    if (point.isTouching(JA_DVAN)) {
+        point.turn(Direction.Right, 45)
+        point.move(1)
+    }
     if (point.isTouching(ja)) {
-        point.turn(Direction.Right, 90)
+        point.turn(Direction.Right, 45)
         point.move(1)
     }
     if (point.isTouching(e1)) {
         e1.delete()
         point.turn(Direction.Right, 180)
         point.move(2)
-        win = win + 1
         game.addScore(1)
     }
     if (point.isTouching(e2)) {
         e2.delete()
         point.turn(Direction.Right, 180)
-        point.move(2)
-        win = win + 1
+        point.move(1)
         game.addScore(1)
     }
     if (point.isTouching(e3)) {
         e3.delete()
         point.turn(Direction.Right, 180)
-        point.move(2)
-        win = win + 1
+        point.move(1)
     }
     if (point.isTouching(e4)) {
         e4.delete()
         point.turn(Direction.Right, 180)
         point.move(2)
-        win = win + 1
     }
     if (point.isTouching(e5)) {
         e5.delete()
         point.turn(Direction.Right, 180)
-        point.move(2)
-        win = win + 1
+        point.move(1)
         game.addScore(1)
     }
     if (point.isTouching(e6)) {
         e6.delete()
         point.turn(Direction.Right, 180)
         point.move(2)
-        win = win + 1
         game.addScore(1)
     }
     if (point.isTouching(_7e)) {
         _7e.delete()
         point.turn(Direction.Right, 180)
-        point.move(2)
+        point.move(1)
         game.addScore(1)
-        win = win + 1
     }
     if (point.isTouching(e8)) {
         e8.delete()
         point.turn(Direction.Right, 180)
-        point.move(2)
-        win = win + 1
+        point.move(1)
         game.addScore(1)
     }
     if (point.isTouching(e9)) {
         e9.delete()
         point.turn(Direction.Right, 180)
-        point.move(2)
-        win = win + 1
+        point.move(1)
         game.addScore(1)
     }
     if (point.isTouching(e10final)) {
         e10final.delete()
         point.turn(Direction.Right, 180)
-        point.move(2)
-        win = win + 1
+        point.move(1)
         game.addScore(1)
     }
     if (point.isTouching(S4)) {
@@ -175,6 +188,13 @@ basic.forever(function () {
         game.removeLife(1)
     }
     S1.set(LedSpriteProperty.Brightness, 0)
+    S2.set(LedSpriteProperty.Brightness, 0)
     S3.set(LedSpriteProperty.Brightness, 0)
     S4.set(LedSpriteProperty.Brightness, 0)
+    S5.set(LedSpriteProperty.Brightness, 0)
+})
+control.inBackground(function () {
+    while (game.isGameOver()) {
+        music.play(music.stringPlayable("A G A F C B G F ", 120), music.PlaybackMode.InBackground)
+    }
 })
